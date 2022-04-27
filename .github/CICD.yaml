@@ -1,14 +1,20 @@
-name: auto_tag
+name: Generate tag
+
 on:
   push:
     branches:
       - master
+
 jobs:
-  
-    name: Get runner id and tag the current code snapshot
+  build:
+    name: Generate tag
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - name: Check out code
+        uses: actions/checkout@master
+        with:
+          fetch-depth: '0'
+
       - name: Bump version and push tag
         uses: ChloePlanet/github-tag-action@master
         env:
